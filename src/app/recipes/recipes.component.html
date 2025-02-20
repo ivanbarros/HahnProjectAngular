@@ -1,0 +1,10 @@
+<div class="recipe-grid">
+  <div class="recipe-card" *ngFor="let recipe of recipes$ | async">
+    <img [src]="recipe.imgUrl" alt="{{ recipe.strMeal }}" class="recipe-image" />
+    <div class="recipe-details">
+      <h2 class="recipe-title">{{ recipe.strMeal }}</h2>
+      <p><strong>Ingredients:</strong> {{ recipe.strIngredient1 }}</p>
+      <p><strong>Instructions:</strong> {{ recipe.strInstructions }}</p>
+    </div>
+  </div>
+</div>
