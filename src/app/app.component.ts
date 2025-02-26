@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from "./nav/nav.component";
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ export class AppComponent {
     BrowserModule,
     CollapseModule.forRoot(),
     AppComponent,
+    CommonModule
 
   ],
   providers: [],

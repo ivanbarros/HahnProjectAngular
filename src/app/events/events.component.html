@@ -1,8 +1,44 @@
-<h1><small>Não perca os eventos em destaque</small></h1>
-<div *ngFor="let event of events$ | async">
-  <p><b>Location: </b> <i>{{ event.location }}</i></p>
-  <p><b>Title: </b> <i>{{ event.title }}</i></p>
-  <p><b>Date: </b> <mark>{{ event.eventDate | formatDateBR }}</mark></p>
-  <p><b>Quantity of people: </b> <i>{{ event.qntPeople }}</i></p>
-  <hr>
-</div>
+<h2>Eventos:</h2>
+<h5><small>Não perca os eventos em destaque</small></h5>
+
+<form action="" class="form-inline">
+  <div class="form-group mb-2">
+   <input type="text" class="form-control mr-2" placeholder="Search event">
+   <button class="btn btn-outline-success">Search</button>
+  </div>
+</form>
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>#</th>
+      <!-- <th>Image:</th> -->
+      <th>Title:</th>
+      <th>Location:</th>
+      <th>Date:</th>
+      <th>Hour:</th>
+      <th>Quantity of People:</th>
+      <th>Observation:</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="events$ | async as events">
+    <tr *ngFor="let event of events$ | async">
+      <td>{{ event.id }}</td>
+      <!-- <td><img [src]="event.imagemUrl" alt="{{ event.title }}" /></td> -->
+      <td><i>{{ event.title }}</i></td>
+      <td><i>{{ event.location }}</i></td>
+      <td><mark>{{ event.eventDate | formatDateBR }}</mark></td>
+      <td>{{event.hourEvent}}</td>
+      <td><i>{{ event.qntPeople}}</i></td>
+      <td>-</td>
+
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!(events$ | async)?.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h4>Nenhum Item encontrado</h4>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+

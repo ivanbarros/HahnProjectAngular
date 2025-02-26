@@ -7,11 +7,12 @@ import localePt from '@angular/common/locales/pt';
 import { Pipe, PipeTransform } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { forwardRef } from "@angular/core";
+import { CommonModule } from '@angular/common';
 registerLocaleData(localePt);
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [NgFor, AsyncPipe, forwardRef(() => FormatDateBRPipe)],
+  imports: [NgFor, AsyncPipe, forwardRef(() => FormatDateBRPipe),CommonModule],
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
