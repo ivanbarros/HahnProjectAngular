@@ -1,12 +1,13 @@
 <h2>Eventos:</h2>
 <h5><small>Não perca os eventos em destaque</small></h5>
 
-<form action="" class="form-inline">
+<div action="" class="form-inline">
   <div class="form-group mb-2">
     <input type="text" class="form-control mr-2" placeholder="Search event" [(ngModel)]="filterList" name="filterList">
     <button class="btn btn-outline-success">Search</button>
   </div>
-</form>
+</div>
+Filtro: {{filterList}}
 <table class="table table-striped table-hover table-bordered table-responsive">
   <thead class="thead-dark table-dark">
     <tr>
