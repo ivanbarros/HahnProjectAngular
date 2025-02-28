@@ -1,17 +1,19 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { EventsComponent } from "./events/events.component";
 import { RecipesComponent } from "./recipes/recipes.component";
 import { HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from "./nav/nav.component";
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
-  standalone : true,
+  standalone: true,
   imports: [RouterOutlet, EventsComponent, RecipesComponent, NavComponent, CollapseModule],
   providers: [HttpClient, BrowserAnimationsModule],
   templateUrl: './app.component.html',
@@ -29,8 +31,8 @@ export class AppComponent {
     BrowserModule,
     CollapseModule.forRoot(),
     AppComponent,
-    CommonModule
-
+    CommonModule,
+    FormsModule
   ],
   providers: [],
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { NgFor, AsyncPipe} from '@angular/common';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
@@ -8,27 +8,34 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { forwardRef } from "@angular/core";
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 registerLocaleData(localePt);
+
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [NgFor, AsyncPipe, forwardRef(() => FormatDateBRPipe),CommonModule],
+  imports: [NgFor, AsyncPipe, forwardRef(() => FormatDateBRPipe), CommonModule, FormsModule], // Add FormsModule here
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
+  showImage: boolean = true;
   private http = inject(HttpClient);
   public events$: Observable<any> | undefined;
+  filterList: string = '';
 
   ngOnInit(): void {
     this.events$ = this.getEvents();
+  }
+
+  changeImage() {
+    this.showImage = !this.showImage;
   }
 
   public getEvents(): Observable<any> {
     return this.http.get('https://localhost:7105/api/Events');
   }
 }
-
 
 @Pipe({
   name: 'formatDateBR'
