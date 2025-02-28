@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NgFor, AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { Pipe, PipeTransform } from '@angular/core';
@@ -19,14 +19,32 @@ registerLocaleData(localePt);
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent implements OnInit {
-  showImage: boolean = true;
   private http = inject(HttpClient);
   public events$: Observable<any> | undefined;
-  filterList: string = '';
+  showImage: boolean = true;
+  private _filterList: string = '';
 
+  public get filterList(): string {
+    return this._filterList;
+   }
+
+  public set filterList(value: string) {
+    this._filterList = value;
+    this.events$ = this.filterList ? this.filteredEvents(this.filterList) : this.getEvents();
+  }
+  filteredEvents(filterBy: string): Observable<any> {
+  filterBy = filterBy.toLocaleLowerCase();
+  return this.getEvents().pipe(
+    map((events: any[]) => events.filter(event =>
+      event.title.toLocaleLowerCase().includes(filterBy) ||
+      event.location.toLocaleLowerCase().includes(filterBy)
+    ))
+  );
+}
   ngOnInit(): void {
     this.events$ = this.getEvents();
   }
+
 
   changeImage() {
     this.showImage = !this.showImage;
